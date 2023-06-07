@@ -1,21 +1,44 @@
+/*
+
+This is a resource class and will accept some HTTP requests and then return
+some HTTP responses
+
+ */
+
 package com.appsdevblog.app.ws.ui.entrypoint;
 
-import com.appsdevblog.app.ws.ui.model.request.CreateUserRequsetModel;
+import com.appsdevblog.app.ws.service.UserService;
+import com.appsdevblog.app.ws.service.UserServiceImpl;
+import com.appsdevblog.app.ws.shared.dto.UserDTO;
+import com.appsdevblog.app.ws.ui.model.request.CreateUserRequestModel;
 import com.appsdevblog.app.ws.ui.model.response.UserProfileRest;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import org.springframework.beans.BeanUtils;
 
-@Path("/users")
+@Path("/users")                                              //this annotation make it a resource class
 public class UserEntryPoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public UserProfileRest createUser(CreateUserRequsetModel requestObject){
+    public UserProfileRest createUser(CreateUserRequestModel requestObject){
         UserProfileRest returnValue = new UserProfileRest();
+
+        //Prepare UserDTO
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(requestObject, userDTO); //populated this object with information send from user
+
+        //Create new user
+        UserService userService = new UserServiceImpl();
+        UserDTO createUserProfile = userService.createUser(userDTO);
+
+        //Prepare response
+        BeanUtils.copyProperties(createUserProfile, returnValue);
+
         return returnValue;
     }
 }

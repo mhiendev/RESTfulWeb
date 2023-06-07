@@ -1,8 +1,13 @@
+/*
+    This class will RESPOND information back to the user, we don't want to include
+    sensitive information such as password
+
+ */
 package com.appsdevblog.app.ws.ui.model.response;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement             //convert JSON into Java model and vice versa
 public class UserProfileRest {
     private String userId;
     private String firstName;

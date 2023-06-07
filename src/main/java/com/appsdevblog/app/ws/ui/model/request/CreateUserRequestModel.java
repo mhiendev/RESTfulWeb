@@ -1,9 +1,13 @@
+/*
+    This class will RECEIVE some information from user to create a new user in the system
+ */
 package com.appsdevblog.app.ws.ui.model.request;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-public class CreateUserRequsetModel {
+@XmlRootElement         //convert JSON into Java model and vice versa
+public class CreateUserRequestModel {
+    //these properties match with one in Postman
     private String firstName;
     private String lastName;
     private String email;
