@@ -12,10 +12,8 @@ import com.appsdevblog.app.ws.service.UserServiceImpl;
 import com.appsdevblog.app.ws.shared.dto.UserDTO;
 import com.appsdevblog.app.ws.ui.model.request.CreateUserRequestModel;
 import com.appsdevblog.app.ws.ui.model.response.UserProfileRest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.BeanUtils;
 
@@ -41,4 +39,5 @@ public class UserEntryPoint {
 
         return returnValue;
     }
+
 }
